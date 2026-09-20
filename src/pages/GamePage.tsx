@@ -9,7 +9,7 @@ function GamePage() {
   return (
     <main>
       <h2>Game</h2>
-      <Card card={testCard}/>
+      <Card card={testCard} />
     </main>
   );
 }

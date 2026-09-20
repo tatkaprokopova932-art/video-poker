@@ -25,3 +25,7 @@
 .playing-card.black{
   color: black;
 }
+
+.card-back {
+  background-color: darkred;
+}
