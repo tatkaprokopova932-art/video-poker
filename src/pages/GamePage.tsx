@@ -2,8 +2,12 @@ import Card from "../components/Card/Card";
 import TotalCoins from "../components/TotalCoins";
 import CurrentBet from "../components/CurrentBet";
 import PayoutTable from "../components/PayoutTable";
+import useGameStore from "../store/gameStore";
 
 function GamePage() {
+  const coins = useGameStore((state) => state.coins);
+  const bet = useGameStore((state) => state.bet);
+
   const testCard = {
     value: "A" as const,
     suit: "hearts" as const,
@@ -13,10 +17,10 @@ function GamePage() {
     <main>
       <h2>Game</h2>
 
-      <TotalCoins coins={100} />
-      <CurrentBet bet = {5} />
+      <TotalCoins coins={coins} />
+      <CurrentBet bet={bet} />
 
-      <PayoutTable/>
+      <PayoutTable />
 
       <Card card={testCard} />
     </main>
