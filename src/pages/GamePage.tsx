@@ -1,4 +1,5 @@
 import Card from "../components/Card/Card";
+import TotalCoins from "../components/TotalCoins";
 
 function GamePage() {
   const testCard = {
@@ -9,6 +10,7 @@ function GamePage() {
   return (
     <main>
       <h2>Game</h2>
+      <TotalCoins coins ={100}/>
       <Card card={testCard} />
     </main>
   );
