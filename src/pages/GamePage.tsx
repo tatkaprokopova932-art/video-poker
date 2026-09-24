@@ -7,6 +7,8 @@ import useGameStore from "../store/gameStore";
 function GamePage() {
   const coins = useGameStore((state) => state.coins);
   const bet = useGameStore((state) => state.bet);
+  const startRound = useGameStore ((state)=> state.startRound);
+  const hand = useGameStore ((state)=> state.hand);
 
   const testCard = {
     value: "A" as const,
@@ -19,6 +21,12 @@ function GamePage() {
 
       <TotalCoins coins={coins} />
       <CurrentBet bet={bet} />
+      <button type="button" onClick={startRound}>Deal</button>
+      <div>
+        {hand.map((card, index)=> (
+          <Card key= {index} card = {card} />
+        ))}
+      </div>
 
       <PayoutTable />
 
