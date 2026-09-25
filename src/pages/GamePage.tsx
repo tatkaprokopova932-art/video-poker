@@ -1,60 +1,17 @@
-import Card from "../components/Card/Card";
-import TotalCoins from "../components/TotalCoins";
-import CurrentBet from "../components/CurrentBet";
-import PayoutTable from "../components/PayoutTable";
-import useGameStore from "../store/gameStore";
+import Game from "../components/Game";
 
-
+/**
+ * Displays the page containing the Video Poker game.
+ *
+ * @returns The game page.
+ */
 function GamePage() {
-  const activePlayer = useGameStore((state) => state.activePlayer);
-  const bet = useGameStore((state) => state.bet);
-  const startRound = useGameStore ((state)=> state.startRound);
-  const hand = useGameStore ((state)=> state.hand);
-  const heldCardIndexes = useGameStore((state) => state.heldCardIndexes);
-  const toggleHold = useGameStore((state)=> state.toggleHold);
-  const drawCards = useGameStore((state)=> state.drawCards);
-  const hasDrawn = useGameStore((state)=>state.hasDrawn);
-  const testCard = {
-    value: "A" as const,
-    suit: "hearts" as const,
-  };
-  const currentPokerHand = useGameStore((state)=>state.currentPokerHand,);
-
   return (
     <main>
       <h2>Game</h2>
-
-      <TotalCoins coins={activePlayer?.coins ?? 0} />
-      <CurrentBet bet={bet} />
-      <button type="button" onClick={startRound}>Deal</button>
-
-      <button 
-      type="button" 
-      onClick ={drawCards} 
-      disabled={hasDrawn || hand.length===0}>
-        Draw
-      </button>
-
-      {currentPokerHand && (
-  <p>Hand: {currentPokerHand}</p>
-)}
-
-      <div>
-        {hand.map((card, index)=> (
-          <div key= {index}>
-            <Card card = {card}/>
-
-            <button type="button" onClick={() => toggleHold (index)}>
-              {heldCardIndexes.includes(index)?"HELD" : "HOLD"}
-              </button>
-          </div>    
-        ))}
-      </div>
-
-      <PayoutTable />
-
-      <Card card={testCard} />
+      <Game />
     </main>
   );
 }
+
 export default GamePage;
