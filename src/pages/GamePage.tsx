@@ -14,11 +14,11 @@ function GamePage() {
   const toggleHold = useGameStore((state)=> state.toggleHold);
   const drawCards = useGameStore((state)=> state.drawCards);
   const hasDrawn = useGameStore((state)=>state.hasDrawn);
-
   const testCard = {
     value: "A" as const,
     suit: "hearts" as const,
   };
+  const currentPokerHand = useGameStore((state)=>state.currentPokerHand,);
 
   return (
     <main>
@@ -34,6 +34,11 @@ function GamePage() {
       disabled={hasDrawn || hand.length===0}>
         Draw
       </button>
+
+      {currentPokerHand && (
+  <p>Hand: {currentPokerHand}</p>
+)}
+
       <div>
         {hand.map((card, index)=> (
           <div key= {index}>

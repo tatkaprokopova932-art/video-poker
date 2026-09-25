@@ -3,6 +3,8 @@ import type { Player } from "../types/Player";
 import type { PlayingCard } from "../types/PlayingCard";
 import { createDeck } from "../utils/createDeck";
 import { shuffleDeck } from "../utils/shuffleDeck";
+import type { PokerHand } from "../types/PokerHand";
+import { evaluateHand } from "../utils/evaluateHand";
 
 type GameState = {
   startRound: ()=> void;
@@ -19,6 +21,7 @@ type GameState = {
   discardedCards: PlayingCard[];
   heldCardIndexes: number[];
   hasDrawn: boolean;
+  currentPokerHand: PokerHand | null;
 
 
 
@@ -36,6 +39,7 @@ const useGameStore = create<GameState>((set) => ({
   discardedCards: [],
   heldCardIndexes: [],
   hasDrawn: false,
+  currentPokerHand: null,
 
 
   /**
@@ -54,6 +58,7 @@ startRound: () =>{
     discardedCards: [],
     heldCardIndexes: [],
     hasDrawn: false,
+    currentPokerHand: null,
   });
 
 },
@@ -90,12 +95,16 @@ drawCards: () => {
     });
 
     const remainingDeck = state.deck.slice(deckIndex);
+
+    const pokerHand = evaluateHand(newHand);
+
     return {
       hand: newHand,
       deck: remainingDeck,
       DiscardedCards: newDiscardedCards,
       heldCardIndexes: [],
       hasDrawn: true,
+      currentPokerHand: pokerHand,
     };
 
   });
