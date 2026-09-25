@@ -6,7 +6,7 @@ import useGameStore from "../store/gameStore";
 
 
 function GamePage() {
-  const coins = useGameStore((state) => state.coins);
+  const activePlayer = useGameStore((state) => state.activePlayer);
   const bet = useGameStore((state) => state.bet);
   const startRound = useGameStore ((state)=> state.startRound);
   const hand = useGameStore ((state)=> state.hand);
@@ -24,7 +24,7 @@ function GamePage() {
     <main>
       <h2>Game</h2>
 
-      <TotalCoins coins={coins} />
+      <TotalCoins coins={activePlayer?.coins ?? 0} />
       <CurrentBet bet={bet} />
       <button type="button" onClick={startRound}>Deal</button>
 

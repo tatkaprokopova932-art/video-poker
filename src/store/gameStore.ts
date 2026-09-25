@@ -6,6 +6,7 @@ import { createDeck } from "../utils/createDeck";
 import { shuffleDeck } from "../utils/shuffleDeck";
 import type { PokerHand } from "../types/PokerHand";
 import { evaluateHand } from "../utils/evaluateHand";
+import { getPayoutMultiplier } from "../data/payouts";
 
 type GameState = {
   startRound: ()=> void;
@@ -13,7 +14,6 @@ type GameState = {
   drawCards: ()=> void;
 
 
-  coins: number;
   bet: number;
   players: Player [];
   activePlayer : Player | null;
@@ -33,7 +33,6 @@ type GameState = {
 const useGameStore = create<GameState>()(
   persist(
     (set) => ({
-  coins: 100,
   bet: 5,
   players: [],
   activePlayer: null,
@@ -51,9 +50,18 @@ const useGameStore = create<GameState>()(
  * @returns Nothing.
  */
 startRound: () =>{
+  const state = useGameStore.getState();
+
+if (!state.activePlayer || state.activePlayer.coins < state.bet) {
+  return;
+}
   const newDeck = shuffleDeck(createDeck());
   const newHand = newDeck.slice(0,5);
   const remainingDeck = newDeck.slice(5);
+  const updatedPlayer = {
+  ...state.activePlayer,
+  coins: state.activePlayer.coins - state.bet,
+};
 
   set({
     deck: remainingDeck,
@@ -62,6 +70,10 @@ startRound: () =>{
     heldCardIndexes: [],
     hasDrawn: false,
     currentPokerHand: null,
+    activePlayer: updatedPlayer,
+    players: state.players.map((player) =>
+      player.name === updatedPlayer.name ? updatedPlayer : player,
+    ),
   });
 
 },
@@ -101,6 +113,15 @@ drawCards: () => {
 
     const pokerHand = evaluateHand(newHand);
 
+    const winnings = getPayoutMultiplier(pokerHand) * state.bet;
+
+const updatedPlayer = state.activePlayer
+  ? {
+      ...state.activePlayer,
+      coins: state.activePlayer.coins + winnings,
+    }
+  : null;
+
     return {
       hand: newHand,
       deck: remainingDeck,
@@ -108,6 +129,12 @@ drawCards: () => {
       heldCardIndexes: [],
       hasDrawn: true,
       currentPokerHand: pokerHand,
+      activePlayer: updatedPlayer,
+players: updatedPlayer
+  ? state.players.map((player) =>
+      player.name === updatedPlayer.name ? updatedPlayer : player,
+    )
+  : state.players,
     };
 
   });
