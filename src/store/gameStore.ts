@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import type { Player } from "../types/Player";
 import type { PlayingCard } from "../types/PlayingCard";
 import { createDeck } from "../utils/createDeck";
@@ -29,7 +30,9 @@ type GameState = {
   selectPlayer: (name: string)=> void;
 };
 
-const useGameStore = create<GameState>((set) => ({
+const useGameStore = create<GameState>()(
+  persist(
+    (set) => ({
   coins: 100,
   bet: 5,
   players: [],
@@ -125,7 +128,12 @@ drawCards: () => {
         activePlayer: state.players.find((player) => player.name === name) || null,
       }));
     },
-}));
+    }),
+    {
+      name: "video-poker-game",
+    },
+  ),
+);
 
 
 export default useGameStore;
