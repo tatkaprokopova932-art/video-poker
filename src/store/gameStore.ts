@@ -49,6 +49,14 @@ const useGameStore = create<GameState>()(
  *
  * @returns Nothing.
  */
+
+
+  /**
+ * Starts a new round by creating and shuffling a deck,
+ * dealing five cards, and subtracting the current bet.
+ *
+ * @returns Nothing.
+ */
 startRound: () =>{
   const state = useGameStore.getState();
 
@@ -78,6 +86,13 @@ if (!state.activePlayer || state.activePlayer.coins < state.bet) {
 
 },
 
+
+/**
+ * Holds or releases a card selected by the player.
+ *
+ * @param index - The position of the card in the current hand.
+ * @returns Nothing.
+ */
 toggleHold: (index) =>{
   set((state)=> ({
     heldCardIndexes: state.heldCardIndexes.includes(index)
@@ -140,6 +155,13 @@ players: updatedPlayer
   });
 },
 
+
+/**
+ * Creates a new player with 100 starting coins.
+ *
+ * @param name - The name of the new player.
+ * @returns Nothing.
+ */
   createPlayer: (name) =>{
     const newPlayer: Player = {
       name: name,
@@ -150,6 +172,14 @@ players: updatedPlayer
     players: [...state.players, newPlayer],
   }));
   },
+
+
+  /**
+ * Creates a new player with 100 starting coins.
+ *
+ * @param name - The name of the new player.
+ * @returns Nothing.
+ */
   selectPlayer: (name) => {
       set ((state) => ({
         activePlayer: state.players.find((player) => player.name === name) || null,

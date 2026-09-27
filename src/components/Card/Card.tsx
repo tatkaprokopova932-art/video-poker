@@ -13,6 +13,13 @@ const suitSymbols = {
   spades: "♠",
 };
 
+/**
+ * Displays a playing card as either its front or back side.
+ *
+ * @param card - The playing card containing its value and suit.
+ * @param faceDown - Determines whether the back of the card is displayed.
+ * @returns The playing card UI.
+ */
 function Card({ card, faceDown = false }: CardProps) {
   const isRedSuit = card.suit === "hearts" || card.suit === "diamonds";
 
