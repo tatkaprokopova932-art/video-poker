@@ -1,11 +1,13 @@
 .playing-card {
   width: 140px;
-  height: 200px;
-  border: 2px solid black;
-  border-radius: 10px;
+  aspect-ratio: 7 / 10;
+  border: 2px solid #d4d4d4;
+  border-radius: 12px;
   display: grid;
   grid-template-rows: auto 1fr;
   padding: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
 }
 
 .card-value {
@@ -15,17 +17,55 @@
 
 .card-suit {
   place-self: center;
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .playing-card.red {
   color: red;
 }
 
-.playing-card.black{
+.playing-card.black {
   color: black;
 }
 
 .card-back {
-  background-color: darkred;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #0f3d24,
+      #0f3d24 8px,
+      #166534 8px,
+      #166534 16px
+    );
+  border: 4px solid white;
+  box-shadow: inset 0 0 0 3px #22c55e;
+}
+
+@media (max-width: 800px) {
+  .playing-card {
+    width: 110px;
+  }
+
+  .card-value {
+    font-size: 24px;
+  }
+
+  .card-suit {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .playing-card {
+    width: 70px;
+    padding: 6px;
+  }
+
+  .card-value {
+    font-size: 18px;
+  }
+
+  .card-suit {
+    font-size: 22px;
+  }
 }
