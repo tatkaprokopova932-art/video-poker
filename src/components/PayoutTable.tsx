@@ -1,83 +1,36 @@
-const payouts = [
-{
-hand: "Royal Flush",
-  coins: 250,
-},
-
-{
-  hand: "Straight Flush",
-  coins : 50,
-},
-
-{
-  hand: "Four of a Kind",
-  coins: 25,
-},
-
-{
-  hand: "Full House",
-  coins: 9,
-},
-{
-  hand: "Flush",
-  coins: 6,
-},
-
-{
-  hand: "Straight",
-  coins: 4,
-},
-
-{
-  hand: "Three of a Kind",
-  coins: 3,
-},
-
-{
-  hand: "Two Pair",
-  coins: 2,
-},
-
-{
-  hand: "Jacks or Better",
-  coins: 1,
-},
-
-
-
-]
+import { payouts } from "../data/payouts";
 
 /**
  * Displays the payout table for winning poker hands.
  *
  * @returns The payout table UI.
  */
-
 function PayoutTable() {
   return (
-  <div>
-    <h2>Payout Table</h2>
+    <section className="payout-section">
+      <h2>Payout Table</h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Hand</th>
-          <th>Payout</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {payouts.map((payout) => (
-          <tr key={payout.hand}>
-            <td>{payout.hand}</td>
-            <td>{payout.coins}</td>
+      <table className="payout-table">
+        <thead>
+          <tr>
+            <th scope="col">Hand</th>
+            <th scope="col">Payout</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
 
-  
-  </div>
-)}
+        <tbody>
+          {payouts
+            .filter((payout) => payout.multiplier > 0)
+            .map((payout) => (
+              <tr key={payout.hand}>
+                <td>{payout.label}</td>
+                <td>{payout.multiplier}×</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </section>
+  );
+}
 
-export default PayoutTable 
+export default PayoutTable;

@@ -10,7 +10,10 @@ type CurrentBetProps = {
  */
 
 function CurrentBet({ bet }: CurrentBetProps) {
-  return <p>Bet: {bet}</p>;
+  return <p className="game-stat">
+  <span>Bet</span>
+  <strong>{bet}</strong>
+</p>
 }
 
 export default CurrentBet;

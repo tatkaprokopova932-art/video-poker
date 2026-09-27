@@ -2,6 +2,411 @@
   box-sizing: border-box;
 }
 
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f5f5f5;
+  background-color: #080b09;
+}
+
 body {
   margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, #16351f 0%, #0b1510 35%, #080b09 75%);
+  color: #f5f5f5;
+}
+
+/* HEADER */
+
+.header {
+  min-height: 80px;
+  padding: 18px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  background-color: rgba(8, 11, 9, 0.95);
+  border-bottom: 1px solid #1f5130;
+}
+
+.logo {
+  margin: 0;
+  color: #22c55e;
+  font-size: 1.6rem;
+  letter-spacing: 3px;
+}
+
+.nav {
+  display: flex;
+  gap: 12px;
+}
+
+.nav a {
+  color: #d4d4d4;
+  text-decoration: none;
+  padding: 9px 14px;
+  border-radius: 8px;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.nav a:hover {
+  color: #ffffff;
+  background-color: #173d24;
+}
+
+.nav a.active {
+  color: #ffffff;
+  background-color: #15803d;
+}
+
+/* PAGE */
+
+main {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+main > h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+/* GAME */
+
+.game {
+  display: grid;
+  gap: 24px;
+  padding: 28px;
+  background-color: rgba(18, 26, 22, 0.96);
+  border: 1px solid #235c35;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* BUTTONS */
+
+button {
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #15803d;
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    background-color 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #22c55e;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #4ade80;
+  outline-offset: 3px;
+}
+
+/* CARDS */
+
+.game-hand {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+.card-container {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.card-container button[aria-pressed="true"] {
+  color: #08110b;
+  background-color: #4ade80;
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.4);
+}
+
+/* PAYOUT */
+
+.payout-section {
+  margin-top: 10px;
+  padding: 20px;
+  background-color: #0c130f;
+  border: 1px solid #234d31;
+  border-radius: 12px;
+}
+
+.payout-section h2 {
+  margin-top: 0;
+  color: #4ade80;
+}
+
+.payout-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.payout-table th,
+.payout-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #26382c;
+  text-align: left;
+}
+
+.payout-table th {
+  color: #4ade80;
+  background-color: #111c15;
+}
+
+.payout-table tbody tr:hover {
+  background-color: #142319;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .nav {
+    width: 100%;
+    justify-content: center;
+  }
+
+  main {
+    width: min(100% - 16px, 1100px);
+    padding: 20px 0;
+  }
+
+  .game {
+    padding: 16px 10px;
+  }
+
+  .game-hand {
+    gap: 6px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .player-form-controls {
+  flex-direction: column;
+}
+
+.player-form-controls button {
+  width: 100%;
+}
+
+.create-player,
+.player-list-section {
+  padding: 16px;
+}
+
+}
+
+.game-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.game-actions button {
+  min-width: 90px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  background-color: #16a34a;
+  border-color: #4ade80;
+}
+
+.game-actions button:hover:not(:disabled) {
+  background-color: #22c55e;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.game-stat {
+  min-width: 100px;
+  margin: 0;
+  padding: 10px 18px;
+  display: grid;
+  gap: 4px;
+  text-align: center;
+  background-color: #0c130f;
+  border: 1px solid #235c35;
+  border-radius: 10px;
+}
+
+.game-stat span {
+  color: #a3a3a3;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.game-stat strong {
+  color: #4ade80;
+  font-size: 1.3rem;
+}
+
+.card-container button {
+  min-width: 70px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+}
+
+/* PLAYERS PAGE */
+
+.players-page {
+  max-width: 760px;
+  margin: 0 auto;
+  display: grid;
+  gap: 28px;
+}
+
+.players-heading {
+  text-align: center;
+}
+
+.players-heading h2 {
+  margin: 5px 0 8px;
+  font-size: 2.2rem;
+}
+
+.players-heading p {
+  margin: 0;
+  color: #a3a3a3;
+}
+
+.page-label {
+  color: #4ade80 !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.create-player,
+.player-list-section {
+  padding: 24px;
+  background-color: rgba(18, 26, 22, 0.96);
+  border: 1px solid #235c35;
+  border-radius: 16px;
+}
+
+.create-player h3,
+.player-list-section h3 {
+  margin-top: 0;
+}
+
+.player-form {
+  display: grid;
+  gap: 8px;
+}
+
+.player-form label {
+  color: #a3a3a3;
+  font-size: 0.9rem;
+}
+
+.player-form-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.player-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  color: #ffffff;
+  background-color: #080b09;
+  border: 1px solid #365641;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.player-form input:focus {
+  outline: 2px solid #4ade80;
+  outline-offset: 2px;
+}
+
+.player-list-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-list-heading span {
+  color: #a3a3a3;
+  font-size: 0.85rem;
+}
+
+.player-list {
+  display: grid;
+  gap: 10px;
+}
+
+.player-card {
+  min-height: 82px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background-color: #0c130f;
+  border: 1px solid #26382c;
+  border-radius: 10px;
+}
+
+.player-card h4 {
+  margin: 0 0 5px;
+  font-size: 1.05rem;
+}
+
+.player-card p {
+  margin: 0;
+  color: #a3a3a3;
+}
+
+.player-card button {
+  min-width: 80px;
+  padding: 7px 12px;
+  font-size: 0.85rem;
+}
+
+.player-card.active-player {
+  border-color: #22c55e;
+  background-color: #102419;
+}
+
+.active-badge {
+  padding: 6px 10px;
+  color: #4ade80;
+  background-color: #15351f;
+  border: 1px solid #22c55e;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }

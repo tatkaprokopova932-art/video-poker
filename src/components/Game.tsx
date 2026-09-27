@@ -24,36 +24,44 @@ function Game() {
   );
 
   return (
-    <section>
+    <section className="game">
+      <div className="game-stats">
       <TotalCoins coins={activePlayer?.coins ?? 0} />
-
       <CurrentBet bet={bet} />
+      </div>
 
-      <button type="button" onClick={startRound}>
-        Deal
-      </button>
-
-      <button
-        type="button"
-        onClick={drawCards}
-        disabled={hasDrawn || hand.length === 0}
-      >
-        Draw
-      </button>
 
       {currentPokerHand && <p>Hand: {currentPokerHand}</p>}
 
-      <div>
+      <div className="game-hand">
         {hand.map((card, index) => (
-          <div key={index}>
+          <div className="card-container" key={index}>
             <Card card={card} />
 
-            <button type="button" onClick={() => toggleHold(index)}>
+            <button 
+            type="button" 
+            onClick={() => toggleHold(index)}
+            aria-pressed={heldCardIndexes.includes(index)}>
+
               {heldCardIndexes.includes(index) ? "HELD" : "HOLD"}
             </button>
           </div>
         ))}
       </div>
+
+      <div className="game-actions">
+  <button type="button" onClick={startRound}>
+    Deal
+  </button>
+
+  <button
+    type="button"
+    onClick={drawCards}
+    disabled={hasDrawn || hand.length === 0}
+  >
+    Draw
+  </button>
+</div>
 
       <PayoutTable />
     </section>
