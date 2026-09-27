@@ -3,6 +3,7 @@ import TotalCoins from "./TotalCoins";
 import CurrentBet from "./CurrentBet";
 import PayoutTable from "./PayoutTable";
 import useGameStore from "../store/gameStore";
+import { Link } from "react-router-dom";
 
 /**
  * Displays the main Video Poker game and connects the game components
@@ -22,6 +23,22 @@ function Game() {
   const currentPokerHand = useGameStore(
     (state) => state.currentPokerHand,
   );
+
+  if (!activePlayer) {
+  return (
+    <section className="player-required">
+      <p className="page-label">VIDEO POKER</p>
+
+      <h2>Who is playing?</h2>
+
+      <p>Select or create a player before starting the game.</p>
+
+      <Link className="select-player-link" to="/players">
+        Select Player
+      </Link>
+    </section>
+  );
+}
 
   return (
     <section className="game">
