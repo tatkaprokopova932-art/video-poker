@@ -127,6 +127,7 @@ a:focus-visible {
   gap: 16px;
   flex-wrap: wrap;
   padding: 20px 0;
+  width: 100%;
 }
 
 .card-container {
@@ -178,7 +179,6 @@ a:focus-visible {
 }
 
 /* RESPONSIVE */
-
 @media (max-width: 700px) {
   .header {
     flex-direction: column;
@@ -192,7 +192,7 @@ a:focus-visible {
   }
 
   main {
-    width: min(100% - 16px, 1100px);
+    width: min(100% - 24px, 1100px);
     padding: 20px 0;
   }
 
@@ -201,11 +201,11 @@ a:focus-visible {
   }
 
   .game-hand {
-    gap: 6px;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-  }
+  gap: 6px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  overflow-x: visible;
+}
 
   .player-form-controls {
   flex-direction: column;
@@ -274,6 +274,39 @@ a:focus-visible {
   min-width: 70px;
   padding: 6px 10px;
   font-size: 0.8rem;
+}
+
+@media (max-width: 400px) {
+  main {
+    width: calc(100% - 16px);
+  }
+
+  .game {
+    padding: 12px 8px;
+  }
+
+  .game-hand {
+    gap: 4px;
+  }
+
+  .card-container {
+    gap: 6px;
+  }
+
+  .card-container button {
+    min-width: 50px;
+    padding: 5px 4px;
+    font-size: 0.7rem;
+  }
+
+  .game-stat {
+    min-width: 80px;
+    padding: 8px 12px;
+  }
+
+  .payout-section {
+    padding: 12px;
+  }
 }
 
 /* PLAYERS PAGE */

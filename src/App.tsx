@@ -5,7 +5,11 @@ import PlayersPage from './pages/PlayersPage'
 import RulesPage from './pages/RulesPage'
 import { Routes, Route } from 'react-router-dom'
 
-
+/**
+ * Displays the main application layout and defines the application routes.
+ *
+ * @returns The application UI with navigation and page routes.
+ */
 function App() {
   return (
     <>

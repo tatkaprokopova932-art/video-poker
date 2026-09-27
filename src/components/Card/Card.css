@@ -69,3 +69,35 @@
     font-size: 22px;
   }
 }
+
+@media (max-width: 900px) {
+  .playing-card {
+    width: 100px;
+  }
+}
+
+@media (max-width: 700px) {
+  .playing-card {
+    width: 70px;
+  }
+}
+
+@media (max-width: 500px) {
+  .playing-card {
+    width: 60px;
+  }
+}
+
+@media (max-width: 400px) {
+  .playing-card {
+    width: 50px;
+  }
+
+  .card-value {
+    font-size: 16px;
+  }
+
+  .card-suit {
+    font-size: 18px;
+  }
+}
